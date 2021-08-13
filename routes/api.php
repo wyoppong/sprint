@@ -1,12 +1,11 @@
 <?php
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Users;
 use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| API Routes
+| All API Routes
 |--------------------------------------------------------------------------
 |
 | Here is where you can register API routes for your application. These
@@ -15,12 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-/* Users */ 
-Route::group(['prefix' => 'users'], function () {
-    Route::get('/', [Users::class, 'index']);
+/* Private API Routes */ 
+Route::group(['prefix' => 'admin'], function () {
+    require __DIR__ . '/api/admin.php';
 });
 

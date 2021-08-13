@@ -24,4 +24,22 @@ trait Helpers
         return Hash::check($password);
     }
 
+    public function loadFiles($location)
+    {
+        try {
+            $rdi = new RecursiveDirectoryIterator($location);
+            $it = new RecursiveIteratorIterator($rdi);
+
+            while ($it->valid()) {
+                if (! $it->isDot() && $it->isFile() && $it->isReadable() && $it->current()->getExtension() === 'php') {
+                    require $it->key();
+                }
+
+                $it->next();
+            }
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
 }
