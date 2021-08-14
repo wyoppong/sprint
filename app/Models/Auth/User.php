@@ -5,6 +5,7 @@ namespace App\Models\Auth;
 use Illuminate\Support\Str;
 use App\Enums\UserTypeEnum;
 use function Safe\preg_match_all;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Sprint\Support\Traits\HasPhoto;
 use Illuminate\Notifications\Notifiable;
@@ -14,7 +15,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles, HasPhoto;
+    use HasPhoto;
+    use HasRoles;
+    use HasFactory;
+    use Notifiable;
+    use HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -57,7 +62,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-        /**
+    /**
      * The accessors to append to the model's array form.
      *
      * @var array

@@ -18,8 +18,13 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+/* Public API Routes */ 
+Route::group(['prefix' => 'frontend'], function () {
+    require __DIR__ . '/api/guest.php';
+});
+
 /* Private API Routes */ 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:sanctum'], function () {
     require __DIR__ . '/api/admin.php';
 });
 
